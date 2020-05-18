@@ -1,0 +1,116 @@
+@media all and (orientation:landscape) {
+
+button {
+    font-size: 18px;
+    height: 1.7em;
+}
+
+.inner {
+    max-height: 85vh;
+}
+
+table {
+    font-size: 12px;
+}
+
+table, th, td {
+    border-width: 1px
+}
+
+
+.manualSwHead {
+    height: 1.5em;
+    margin-top: 0em;
+}
+
+.swOption {
+    *font-size: 20px;
+    margin: 0.3em;
+    height: 2em;
+}
+
+
+
+.Hmod {
+    display: inline-block;
+    width: 39%
+}
+
+.Jbtn {
+    *font-size: 20px;
+    width: 20%;
+    height: 2em;
+    margin: 3%
+}
+
+.Vmod {
+    display: inline-block;
+    width: 25%;
+    margin: 0.5% 1%;
+}
+
+#swapDialog {
+    *font-size: 20px;
+    top: auto;
+    bottom: 2vh;
+    *left: 25vw;
+}
+
+#goToDiv {
+    *font-size: 25px;
+}
+
+.swSubsetV {
+    display: inline;
+}
+
+.swal-modal {
+    width: 70%;
+}
+
+.swal-title {
+    font-size: 22px;
+}
+
+.swal-text, .swal-button {
+    font-size: 18px;
+}
+
+.swal-button--confirm {
+    font-size: 20px;
+}
+
+
+
+}
+
+@media all and (min-width: 900px) and (orientation: landscape) {
+    body {
+        background-color: cyan;
+    }
+
+    table {
+        font-size: 16px;
+    }
+
+    #swapDialog {
+        top: unset;
+        bottom: 50vh;
+    }
+
+    .swal-modal {
+        width: 70%;
+    }
+
+    .swal-title {
+        font-size: 22px;
+    }
+
+    .swal-text, .swal-button {
+        font-size: 18px;
+    }
+
+    .swal-button--confirm {
+        font-size: 20px;
+    }
+}
