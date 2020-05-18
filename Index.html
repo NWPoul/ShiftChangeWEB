@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xml:lang="ru-ru" lang="ru-ru" dir="ltr">
+<head>
+    <title>WebApp_ShiftChange</title>
+    <base target="_top">
+
+    <meta name="robots" content="noindex">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <!-- startSrcCssBlock -->
+    <link rel="stylesheet" type="text/css" href="CSS/icons.css">
+    <link rel="stylesheet" type="text/css" href="CSS/tiny-date-picker.css">
+    <link rel="stylesheet" type="text/css" href="CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="CSS/landScape.css">
+    <!-- endSrcCssBlock -->
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+
+<body>
+
+
+
+    <div id="navBar">
+        <button id="loginButton" class="navButton" onClick="AUTH.loginButtonClick(this)">
+            <i class="icon icon-em menu-f"></i>
+            <span id="loginBtnTxt">Log in</span>
+        </button>
+        <button class="navButton" onClick="undoLastChange()">
+            <i class="icon undo-2"></i>
+        </button>
+        <button class="navButton" onClick="STB_callReset()">
+            <i class="icon refresh"></i>
+        </button>
+        <button class="navButton" onClick="SCH_saveChanges()">
+            <i class="icon upload-s"></i>
+        </button>
+
+        <button id="helpButton" class="navButton" onClick="helpButtonClick(this)"      >
+            <b> ? </b>
+        </button>
+    </div>
+
+    <div class="inner">
+        <table id="mainTable">
+             <!-- content is inserting by JS -->
+             <tr><td>Loading...</td></tr>
+        </table>
+    </div>
+
+
+    <!-- For Swap Dialogue -->
+    <div id="swapDialog">
+    </div>
+
+    <!-- startSrcJsBlock -->
+    <script src="JS/MY-date-range-picker.js"></script>
+    <script src="JS/apiHandler.js"></script>
+    <script src="JS/authModule.js"></script>
+    <script src="JS/googleModule.js"></script>
+    <script src="JS/swapShifts.js"></script>
+    <script src="JS/setTable.js"></script>
+    <script src="JS/requestShChange.js"></script>
+    <!-- endSrcJsBlock -->
+
+    <script>
+        function ERROR_LOGGER(err, id = 'global') {
+            var stack   =  err.error && err.error.stack;
+            var message = `ERR_logger ${id}: \n`
+                        + `${ err && err.error || err }`;
+            if (stack) {
+                message += '\n' + stack;
+            }
+
+            console.trace(message);
+            return message;
+        }//END ERROR_LOGGER
+
+        window.addEventListener( 'error', ERROR_LOGGER );
+        window.onload = HDL_start();
+    </script>
+
+
+
+</body>
+</html>
