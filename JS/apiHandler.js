@@ -1,24 +1,8 @@
 
 //GLOBAL NAME SPACE
-var MODE                = {
-        TEST:              true,
-        ENV:              'GIT',    // 'GIT', 'GAS', 'DEV'
-        HTTP:             'JSONP'   // 'local', 'GAS', 'JSONP'
-};
-if (window.google) {
-    MODE.ENV            = 'GAS';
-    MODE.HTTP           = 'GAS';
-}
 
-var SHIFTAPI_URL        = {
-        WORK_EXEC:        'https://script.google.com/macros/s/AKfycbxrhqgnC54sVCZlRNMTVoIQQ4j-WRqHsjUJoB3bMx8QbELvXg/exec',
-        WORK_DEV:         'https://script.google.com/macros/s/AKfycbzBr83KgXKILg-cCd2iSFUc9HWrDLrwHYeEJH-Igw/dev',
-        TEST_EXEC:        'https://script.google.com/macros/s/AKfycbye8JAXiJfseuPCq-X8z7CWqEc6vq-y9GqjhpFk8ump2Rx-HQ/exec',
-        TEST_DEV:         'https://script.google.com/macros/s/AKfycbxLpmA5BYGw59ZsJe9vm-iQSikMUNSyX5wWbXoPDw/dev',
-        TEST_PROXY:       'https://script.google.com/macros/s/AKfycbzYnFPRARon_zsvYmUA_I1sJhiNWFGu_clw-hcQE8Woi38Kdtw/exec'
-};
-
-var CUR_SHIFTAPI_URL    = SHIFTAPI_URL.TEST_PROXY;
+var MODE = { ENV: 'GIT', HTTP:'JSONP' };
+var CUR_SHIFTAPI_URL = 'https://script.google.com/macros/s/AKfycbye8JAXiJfseuPCq-X8z7CWqEc6vq-y9GqjhpFk8ump2Rx-HQ/exec';
 
 var SHIFTAPI_reqHeader  = 'webAppReq';
 
@@ -296,6 +280,11 @@ async function HDL_Async_upload_vacation(vacationData, httpMode = MODE.HTTP) {
 
 
 
+
+
+
+
+
 function HDL_checkApiResponse(apiResponse) {
     let clearedApiResponse = {
         status: false,
@@ -377,203 +366,225 @@ async function Async_JSONP_HTTP_Transport(url = CUR_SHIFTAPI_URL, parameters) {
 
 
 
-function helpButtonClick() {
-    var helpDiv  = document.createElement('div');
-    var helpText = `<b>Режимы работы:</b><br>
-        <br>
-        <b>Авто (основной):</b>
-        <p class="helpTexpP">
-            - выбираем день, в нем выбираем (кликаем) пару инструкторов, смены которых меняем<br>
-            - в открывшемся диалоге выбираем из возможных вариантов
-        </p>
-        <br>
-        <b>Одиночный-прямой:</b>
-        <p class="helpTexpP">
-            - долгий тап в телефоне (правая кнопка мыши в компе) на смене, которую хотим изменить<br>
-            - или выбор "ввести свой вариант" в диалоге автозамены (если ни один из официально возможных не подошел)
-            <br>
-            <br>
-            В одном запросе можно заявлять замен на несколько дней:<br>
-            Запрос должен быть законченным,<br>
-            если для того, чтобы он не нарушал правил (день-ночь, выходной...) нужно выставить замены в другие дни, они должны быть отправлены в том же запросе.
-        </p>
-        <br>
-        <b>Кнопки:</b>
-        <p class="helpTexpP">
-            <i class="icon icon-em menu-f"></i> - вход(логин) / меню пользователя<br>
-            <i class="icon icon-em undo-2"></i> - откат на шаг (замену) назад<br>
-            <i class="icon icon-em refresh"></i> - перезагрузка расписания (не отправленные замены пропадут)<br>
-            <i class="icon icon-em upload-s"></i> - проверка и отправка запроса<br>
-        </p>
-        <br>
-        Если запрос нарушает правила - будет выдано предупреждение со списком нарушений<br>
-        Если такой запрос все равно хотим отправить - нужно ввести комментраий/причину
-    `;
 
-    helpDiv.innerHTML      = helpText;
-    helpDiv.style.fontSize = '4vmin';
-    swal({
-        content: helpDiv
-    });
-}//end helpButtonClick
-
-
-
-
-//////TESTING/////////////////////////////TESTING///////////////////////////////////////////////TESTING
-//////                                 TESTING AREA
-//////TESTING/////////////////////////////TESTING///////////////////////////////////////////////TESTING
-
-
-function testLS() {
-    let LStestStr     = 'LStestStr';
-    localStorage.setItem( 'LStestRec', LStestStr );
-    let testRes       = ( localStorage.getItem('LStestRec') == LStestStr );
-    localStorage.removeItem( 'LStestRec' );
-    return testRes;
-}
-
-function encodeObj(obj, curSc) {
-    curSc             = curSc || CUR_SC;
-    let encodedObj    = encodeURIComponent( AUTH.xorObj(obj, curSc) );
-    return encodedObj;
-}
-
-function getLastProperty(obj, propChainStr) {
-    propChainStr.split('.')
-    .forEach( (prop) => {
-        if (
-            typeof obj != 'object'
-            ||     obj === null
-            ||   !(prop in obj)
-           ) { return obj; }
-        obj = obj[prop];
-    });
-    return obj;
-}
-
-
-function ttest() {
-    let reqObj = {
-        command: 'test',
-        data: 'no data'
-    };
-    HDL_Async_ShiftApi_JSONP_Request (reqObj)
-    .then( result => {
-        console.log( 'ttest() resp: ', result );
-    });
-}
-
-// let testObj = {
-//     l1: {
-//         l2:{
-//             l3:{
-//                 l4:7
-//             }
-//         }
-//     }
-// }
-// let testArr = [[[[]]]]
-// let tstr = 'l2.l3.l4'
-// console.log(getLastProperty(testObj, 'testObj.l1.l2.l3.l4'));
-// console.log( testObj.l2.l3.l4.l5.l6 instanceof Object);
-// console.log( testArr[0][0][0] instanceof Object);
-
-
-
-function testReq() {
-  let reqObj = {
-    command: 'getLog',
-    data: {
-        stDate:  '2020-04-20',
-        endDate: '2020-04-25',
-        notes:   'WebApp vacation test request'
-    },
-  };
-  HDL_Async_ShiftApi_JSONP_Request (reqObj);
-
-}
-
-
-
-
-function setDefButton( parent, propObj) {
-    let button            = document.createElement('button');
-    for (let prop in propObj) {
-        button[prop]      = propObj[prop];
-    }
-    parent.appendChild(button);
-  }//end service function setDefButton
-
-
-
-
-function setNavBtnMenu() {
-    let navBtnMenuId    = 'navBtnDialog';
-    let navBtnMenu = setDialog(navBtnMenuId, undefined, 'all', 'hide');
-    navBtnMenu.appendToBody();
-
-    return navBtnMenu;
-}
-
-
-function setDialog(id = 'defDialogDiv', className='dialogDiv', closeOnClick='non', closeMethod='hide') {
-    let dialog              = document.getElementById(id);
-        if( !dialog ) {
-             dialog         = document.createElement('div');
-             dialog.id      = id;
-        }
-        dialog.className    = className;
-
-    let modalBack           = document.createElement('div');
-        modalBack.id        = id +'Back';
-        modalBack.className = 'modalBack';
-
-
-    dialog.appendToBody     = () => {
-        modalBack.appendChild(dialog);
-        document.body.appendChild(modalBack);
-    };
-    dialog.removeDialog     = () => {
-        modalBack.remove();
-    };
-
-    dialog.show             = () => {
-        modalBack.style.display  = 'block';
-        dialog.style.display     = 'block';
-    };
-    dialog.close            = () => {
-        if(closeMethod == 'remove') {
-            dialog.removeDialog();
-            return;
-        }
-        dialog.innerHTML         = '';
-        dialog.dataObj           = {};
-        modalBack.style.display  = 'none';
-        dialog.style.display     = 'none';
-    };
-    dialog.dataObj               = {};
-    dialog.setItems = (itemsObj) => {
-        for (const item in itemsObj) {
-            setDefButton( dialog, itemsObj[item] );
-        }
-    };
-
-    switch (closeOnClick) {
-        case 'non':
-            break;
-        case 'out':
-            modalBack.onclick = (e) => {
-                if(e.target.id == modalBack.id ) dialog.close(); };
-            break;
-        case 'all':
-            modalBack.onclick = () => {
-                dialog.close(); };
-            break;
+async function HDL_Async_showLogData(logMonth0 = new Date().getMonth()) {
+    let logData      = LOG_DATA;
+    let upDate       = logData && logData.updated;
+    if ( !upDate || (Date.now() - upDate) > 50000000 ) {
+        swal('Загрузка \n отчёта', {buttons: false});
+        await HDL_Async_getLogData()
+            .then( (respData)   => {
+                logData = respData;
+                console.log(logData);
+            })
+            .catch( err => {
+                console.trace('HDL_Async_showLogData = ' + err );
+                swal(err);
+            });
+        swal.close();
     }
 
-    return dialog;
-}
+    if (USER.nick == 'TST') { logData = LOG_DATA.Скворцов; }
+
+    let periodLogData   = getPeriodLogData(logData, logMonth0);
+    setLogDiag(periodLogData, logMonth0);
+}// END HDL_Async_showLogData
+    function getPeriodLogData(logData, month0) {
+        if (month0 == 12) return logData;
+        let slicedLogData   = {};
+        let dateStrToDMYobj = (str) => {
+            let DMYarr = str.split('.');
+            let DMYobj = {
+                date:   DMYarr[0],
+                month1: DMYarr[1],
+                year:   DMYarr[2]
+            };
+            return DMYobj;
+        };
+
+        for(let dateStr in logData) {
+            let curDMYobj = dateStrToDMYobj(dateStr);
+            if (curDMYobj.month1 - 1 == month0) {
+                slicedLogData[dateStr] = logData[dateStr];
+            }
+        }
+        return slicedLogData;
+    }//end getPeriodLogData
+
+
+
+
+
+
+function setLogDiag(logData, chosenMounth0) {
+    let LogDiagId       = 'LogDiag';
+    let LogDiag         = setDialog(LogDiagId, undefined, 'out', 'remove');
+
+    LogDiag.resetPeriod = (month0) => {
+        LogDiag.close();
+        HDL_Async_showLogData(month0);
+    };
+
+    let logPeriodSelectStr =
+          ` <label for="logPeriodSelect">${USER.nick}: отчёт за </label>
+            <select id       = "logPeriodSelect"
+                    name     = "logPeriodSelect"
+                    class    = "logPeriodSelect"
+                    onchange = "LogDiag.resetPeriod(this.value)">
+                <option value="0"  >Январь</option>
+                <option value="1"  >Февраль</option>
+                <option value="2"  >Март</option>
+                <option value="3"  >Апрель</option>
+                <option value="4"  >Май</option>
+                <option value="5"  >Июнь</option>
+                <option value="6"  >Июль</option>
+                <option value="7"  >Август</option>
+                <option value="8"  >Сентябрь</option>
+                <option value="9"  >Октябрь</option>
+                <option value="10" >Ноябрь</option>
+                <option value="11" >Декабрь</option>
+                <option value="12" >Год</option>
+            </select> `;
+    let logPeriodSelectContainer           = document.createElement('div');
+        logPeriodSelectContainer.className = 'logPeriodSelectContainer';
+        logPeriodSelectContainer.innerHTML = logPeriodSelectStr;
+
+    let logTableContainer                  = document.createElement('div');
+        logTableContainer.className        = 'logTableContainer';
+
+    let summTable                          = setSummTable( doLogReport(logData) );
+    let logTable                           = setLogTable( logData );
+
+    logTableContainer.append( logTable );
+
+    LogDiag.appendChild( logPeriodSelectContainer );
+    LogDiag.appendChild( summTable );
+    LogDiag.appendChild( logTableContainer );
+
+    LogDiag.appendToBody();
+    LogDiag.show();
+
+    let logPeriodSelect                    = document.getElementById('logPeriodSelect');
+        logPeriodSelect.selectedIndex      = chosenMounth0;
+}//end setLogDiag
+    function setLogTable(logData) {
+        let logTable           = document.createElement('table');
+            logTable.Id        = 'logTable';
+            logTable.className = 'logTable';
+
+        let logTbody      = document.createElement('tbody');
+        let firstRowStr   =
+            `<th class="th th0">Дата</th>
+            <th class="th th-cols">Запись</td>`;
+        logTbody.innerHTML = firstRowStr;
+
+        for(let date in logData) {
+            let dateRec = logData[date];
+
+            let tr      = document.createElement('tr');
+            let rowStr  = `<th class="th th-rows">${date}</th>`;
+                rowStr  +='<td>';
+                rowStr  += dateRec.shift   ? ` смена: ${dateRec.shift} `     : '';
+                rowStr  += dateRec.over    ?       ` +${dateRec.over}ч. `    : '';
+                rowStr  += dateRec.bonus   ?  ` бонус ${dateRec.bonus}р. `   : '';
+                rowStr  += dateRec.penalty ?  ` штраф ${dateRec.penalty}р. ` : '';
+                rowStr  += dateRec.notes   ?      ` ( ${dateRec.notes})`     : '';
+                rowStr  +='</td>';
+
+            tr.innerHTML = rowStr;
+            logTbody.appendChild(tr);
+        }
+        logTable.append(logTbody);
+
+        return logTable;
+    }// end setLogTable
+    function setSummTable(LogReport) {
+        let SummTable           = document.createElement('table');
+            SummTable.Id        = 'summTable';
+            SummTable.className = 'summTable';
+
+        let summTbody   = document.createElement('tbody');
+
+        let rowsStr  = [
+            `<th>Смены:</th>
+                <td class='st-cnt'>${LogReport.shift.cnt ? LogReport.shift.cnt+'см.': '-'}</td>
+                <td>               ${LogReport.shift.mn  ? LogReport.shift.mn +'р.' : '-'}</td>
+            `,
+            `<th>Отпуск:</th>
+                <td class='st-cnt'>${LogReport.w.cnt     ? LogReport.w.cnt    +'дн.': '-'}</td>
+                <td>               ${LogReport.w.mn      ? LogReport.w.mn     +'р.' : '-'}</td>
+            `,
+            `<th>Переработки:</th>
+                <td class='st-cnt'>${LogReport.over.hr   ? LogReport.over.hr  +'ч.' : '-'}</td>
+                <td>               ${LogReport.over.mn   ? LogReport.over.mn  +'р.' : '-'}</td>
+            `,
+            `<th>Бонусы / Штрафы:</th>
+                <td colspan="2">
+                    ${LogReport.bonus.mn   ? LogReport.bonus.mn   +'р.' : 'нет'} /
+                    ${LogReport.penalty.mn ? LogReport.penalty.mn +'р. ': 'нет'}</td>`,
+            `<th> Итого: </th><td colspan="2" >${LogReport.total.mn}р.</td>`
+
+        ];
+        rowsStr.forEach( (str) => {
+            let tr = document.createElement('tr');
+                tr.innerHTML = str;
+                summTbody.appendChild(tr);
+        });
+
+
+        SummTable.append(summTbody);
+
+        return SummTable;
+    }// end setSummTable
+        function doLogReport(logData) {
+            let cost      = COST;
+            let logSummary = {
+                    shift:   { cnt: 0, mn: 0 },
+                    w:       { cnt: 0, mn: 0 },
+                    over:    { hr:  0, mn: 0 },
+                    bonus:   { mn:  0 },
+                    penalty: { mn:  0 },
+                    total:   { mn:  0}
+            };
+            for (let date in logData) {
+                let dateRec  = logData[date];
+                let curShift = dateRec.shift;
+                if (curShift) {
+                    var shCounter = { shift:0, w:0 };
+                    apdShiftCounter(curShift, shCounter);
+                    logSummary.shift.cnt += shCounter.shift ;
+                    logSummary.shift.mn  += shCounter.shift * cost.shift;
+                    logSummary.w.cnt     += shCounter.w ;
+                    logSummary.w.mn      += shCounter.w * cost.w;
+                }//end if (curShift)
+                logSummary.over.hr    += dateRec.over    || 0;
+                logSummary.over.mn    += ( dateRec.over  || 0 ) * cost.hr;
+                logSummary.bonus.mn   += dateRec.bonus   || 0;
+                logSummary.penalty.mn -= dateRec.penalty || 0;
+            }
+            let totalMn = 0;
+            for (let key in logSummary) {
+                totalMn += logSummary[key].mn;
+            }
+            logSummary.total.mn = totalMn;
+            return logSummary;
+        }
+            function apdShiftCounter(shift, counter) {
+                var nonRe   = /[vsx-]+$/i,
+                    clearRe = /[^ДНЖW]+/gi,
+                    wRe     = /w/i;
+                if (typeof shift != 'string') shift = shift.toString();
+                var clearedShift = nonRe.test(shift) ?
+                                '' :
+                                shift.replace(clearRe,'');
+                    if ( wRe.test(clearedShift) ) {
+                        counter.w++ ;
+                    } else {
+                        counter.shift += clearedShift.length ;
+                    }
+                return counter;
+            }// end subFn for addShiftCounter
+
 
 
 
@@ -647,7 +658,7 @@ function setVacationRequestDiag() {
                             swal('Запрос отправлен!', {
                                 buttons: false,
                                 timer: 1500,
-                              });
+                                });
                         }
         },
         cancelButton: {
@@ -664,217 +675,210 @@ function setVacationRequestDiag() {
 }
 
 
-function setLogDiag(logData, chosenMounth0) {
-    let LogDiagId       = 'LogDiag';
-    let LogDiag         = setDialog(LogDiagId, undefined, 'out', 'remove');
-
-    LogDiag.resetPeriod = (month0) => {
-        LogDiag.close();
-        HDL_Async_showLogData(month0);
-    };
-
-    let logPeriodSelectStr =
-          ` <label for="logPeriodSelect">mr.${USER.nick}, отчёт за:</label>
-            <select id       = "logPeriodSelect"
-                    name     = "logPeriodSelect"
-                    class    = "logPeriodSelect"
-                    onchange = "LogDiag.resetPeriod(this.value)">
-                <option value="0"  >Январь</option>
-                <option value="1"  >Февраль</option>
-                <option value="2"  >Март</option>
-                <option value="3"  >Апрель</option>
-                <option value="4"  >Май</option>
-                <option value="5"  >Июнь</option>
-                <option value="6"  >Июль</option>
-                <option value="7"  >Август</option>
-                <option value="8"  >Сентябрь</option>
-                <option value="9"  >Октябрь</option>
-                <option value="10" >Ноябрь</option>
-                <option value="11" >Декабрь</option>
-                <option value="12" >Год</option>
-            </select> `;
-    let logPeriodSelectContainer           = document.createElement('div');
-        logPeriodSelectContainer.className = 'logPeriodSelectContainer';
-        logPeriodSelectContainer.innerHTML = logPeriodSelectStr;
-
-    LogDiag.appendChild( logPeriodSelectContainer );
-    LogDiag.appendChild( setSummTable( doLogReport(logData) ) );
-    LogDiag.appendChild( setLogTable(logData) );
-    LogDiag.appendToBody();
-    LogDiag.show();
-
-    let logPeriodSelect                    = document.getElementById('logPeriodSelect');
-        logPeriodSelect.selectedIndex      = chosenMounth0;
-}//end setLogDiag
-
-async function HDL_Async_showLogData(logMonth0 = new Date().getMonth()) {
-    let logData      = LOG_DATA;
-    let upDate       = logData && logData.updated;
-    if ( !upDate || (Date.now() - upDate) > 50000000 ) {
-        swal('Загрузка \n отчёта', {buttons: false});
-        logData = await HDL_Async_getLogData()
-            .then( (logData)   => console.log(logData) )
-            .catch( err => {
-                console.trace('HDL_Async_showLogData = ' + err );
-                swal(err);
-            });
-        swal.close();
-    }
-    if (USER.nick == 'TST') { logData = LOG_DATA.Скворцов; }
-
-    let periodLogData   = getPeriodLogData(logData, logMonth0);
-    setLogDiag(periodLogData, logMonth0);
-}// END HDL_Async_showLogData
 
 
 
-function setLogTable(logData) {
-    let logTable      = document.createElement('table');
-        logTable.Id   = 'logTable';
+function setNavBtnMenu() {
+    let navBtnMenuId    = 'navBtnDialog';
+    let navBtnMenu = setDialog(navBtnMenuId, undefined, 'all', 'hide');
+    navBtnMenu.appendToBody();
 
-    let logTbody      = document.createElement('tbody');
-    let firstRowStr   =
-        `<th>Дата</th>
-         <th>Запись</th>`;
-    logTbody.innerHTML = firstRowStr;
-
-    for(let date in logData) {
-        let dateRec = logData[date];
-
-        let tr      = document.createElement('tr');
-        let rowStr  = `<th>${date}</th>`;
-
-        rowStr      += dateRec.shift   ? ` смена: ${dateRec.shift} `     : '';
-        rowStr      += dateRec.over    ?       ` +${dateRec.over}ч. `    : '';
-        rowStr      += dateRec.bonus   ?  ` бонус ${dateRec.bonus}р. `   : '';
-        rowStr      += dateRec.penalty ?  ` штраф ${dateRec.penalty}р. ` : '';
-        rowStr      += dateRec.notes   ?      ` ( ${dateRec.notes})`     : '';
-
-        tr.innerHTML = rowStr;
-
-        logTbody.appendChild(tr);
-    }
-    logTable.append(logTbody);
-
-    return logTable;
-}// end setLogTable
-
-function setSummTable(LogReport) {
-    let SummTable   = document.createElement('table');
-    SummTable.Id    = 'summTable';
-
-    let summTbody   = document.createElement('tbody');
-
-    let rowsStr  = [
-        `<th>Смены:</th>
-            <td>${LogReport.shift.cnt || '-'}</td>
-            <td>${LogReport.shift.mn  ? LogReport.shift.mn +'р.' : '-'}</td>
-        `,
-        `<th>Отпуск:</th>
-            <td>${LogReport.w.cnt     ? LogReport.w.cnt    +'дн.': '-'}</td>
-            <td>${LogReport.w.mn      ? LogReport.w.mn     +'р.' : '-'}</td>
-        `,
-        `<th>Переработки:</th>
-            <td>${LogReport.over.hr   ? LogReport.over.hr  +'ч.' : '-'}</td>
-            <td>${LogReport.over.mn   ? LogReport.over.mn  +'р.' : '-'}</td>
-        `,
-        `<th>Бонусы / Штрафы:</th>
-            <td colspan="2">
-                ${LogReport.bonus.mn   ? LogReport.bonus.mn   +'р.' : 'нет'} /
-                ${LogReport.penalty.mn ? LogReport.penalty.mn +'р. ': 'нет'}</td>`,
-        `<th> Итого: </th><td colspan="2" >${LogReport.total.mn}р.</td>`
-
-    ];
-    rowsStr.forEach( (str) => {
-        let tr = document.createElement('tr');
-            tr.innerHTML = str;
-            summTbody.appendChild(tr);
-    });
-
-
-    SummTable.append(summTbody);
-
-    return SummTable;
-}// end setSummTable
-
-function getPeriodLogData(logData, month0) {
-    if (month0 == 12) return logData;
-    let slicedLogData   = {};
-    let dateStrToDMYobj = (str) => {
-        let DMYarr = str.split('.');
-        let DMYobj = {
-            date:   DMYarr[0],
-            month1: DMYarr[1],
-            year:   DMYarr[2]
-        };
-        return DMYobj;
-    };
-
-    for(let dateStr in logData) {
-        let curDMYobj = dateStrToDMYobj(dateStr);
-        if (curDMYobj.month1 - 1 == month0) {
-            slicedLogData[dateStr] = logData[dateStr];
-        }
-    }
-    return slicedLogData;
-}//end getPeriodLogData
-
-
-
-function doLogReport(logData) {
-    let cost      = COST;
-    let logSummary = {
-            shift:   { cnt: 0, mn: 0 },
-            w:       { cnt: 0, mn: 0 },
-            over:    { hr:  0, mn: 0 },
-            bonus:   { mn:  0 },
-            penalty: { mn:  0 },
-            total:   { mn:  0}
-    };
-    for (let date in logData) {
-        let dateRec  = logData[date];
-        let curShift = dateRec.shift;
-        if (curShift) {
-            var shCounter = { shift:0, w:0 };
-            apdShiftCounter(curShift, shCounter);
-            logSummary.shift.cnt += shCounter.shift ;
-            logSummary.shift.mn  += shCounter.shift * cost.shift;
-            logSummary.w.cnt     += shCounter.w ;
-            logSummary.w.mn      += shCounter.w * cost.w;
-        }//end if (curShift)
-        logSummary.over.hr    += dateRec.over    || 0;
-        logSummary.over.mn    += ( dateRec.over  || 0 ) * cost.hr;
-        logSummary.bonus.mn   += dateRec.bonus   || 0;
-        logSummary.penalty.mn -= dateRec.penalty || 0;
-    }
-    let totalMn = 0;
-    for (let key in logSummary) {
-        totalMn += logSummary[key].mn;
-    }
-    logSummary.total.mn = totalMn;
-    return logSummary;
+    return navBtnMenu;
 }
 
-// function shiftsLogCounter(rec) {
-//     var counter = { shift:0, w:0 };
-//     rec.forEach( function(dayRec) {
-//         apdShiftCounter(dayRec, counter);
-//     });
-//     return counter;
-// }//end shiftsLogCounter
+function helpButtonClick() {
+    var helpDiv  = document.createElement('div');
+    var helpText = `<b>Режимы работы:</b><br>
+        <br>
+        <b>Авто (основной):</b>
+        <p class="helpTexpP">
+            - выбираем день, в нем выбираем (кликаем) пару инструкторов, смены которых меняем<br>
+            - в открывшемся диалоге выбираем из возможных вариантов
+        </p>
+        <br>
+        <b>Одиночный-прямой:</b>
+        <p class="helpTexpP">
+            - долгий тап в телефоне (правая кнопка мыши в компе) на смене, которую хотим изменить<br>
+            - или выбор "ввести свой вариант" в диалоге автозамены (если ни один из официально возможных не подошел)
+            <br>
+            <br>
+            В одном запросе можно заявлять замен на несколько дней:<br>
+            Запрос должен быть законченным,<br>
+            если для того, чтобы он не нарушал правил (день-ночь, выходной...) нужно выставить замены в другие дни, они должны быть отправлены в том же запросе.
+        </p>
+        <br>
+        <b>Кнопки:</b>
+        <p class="helpTexpP">
+            <i class="icon icon-em menu-f"></i> - вход(логин) / меню пользователя<br>
+            <i class="icon icon-em undo-2"></i> - откат на шаг (замену) назад<br>
+            <i class="icon icon-em refresh"></i> - перезагрузка расписания (не отправленные замены пропадут)<br>
+            <i class="icon icon-em upload-s"></i> - проверка и отправка запроса<br>
+        </p>
+        <br>
+        Если запрос нарушает правила - будет выдано предупреждение со списком нарушений<br>
+        Если такой запрос все равно хотим отправить - нужно ввести комментраий/причину
+        ${window.PUBLIC_VERSION ? window.PUBLIC_VERSION : '...'}
+    `;
 
-function apdShiftCounter(shift, counter) {
-    var nonRe   = /[vsx-]+$/i,
-        clearRe = /[^ДНЖW]+/gi,
-        wRe     = /w/i;
-    if (typeof shift != 'string') shift = shift.toString();
-    var clearedShift = nonRe.test(shift) ?
-                       '' :
-                       shift.replace(clearRe,'');
-        if ( wRe.test(clearedShift) ) {
-            counter.w++ ;
-        } else {
-            counter.shift += clearedShift.length ;
+    helpDiv.innerHTML      = helpText;
+    helpDiv.style.fontSize = '3.5vmin';
+    swal({
+        content: helpDiv
+    });
+}//end helpButtonClick
+
+
+
+
+function HDL_setDefButton( parent, propObj) {
+    let button            = document.createElement('button');
+    for (let prop in propObj) {
+        button[prop]      = propObj[prop];
+    }
+    parent.appendChild(button);
+  }//end service function HDL_setDefButton
+
+function setDialog(id = 'defDialogDiv', className='dialogDiv', closeOnClick='non', closeMethod='hide') {
+    let dialog              = document.getElementById(id);
+        if( !dialog ) {
+             dialog         = document.createElement('div');
+             dialog.id      = id;
         }
-    return counter;
-}// end subFn for addShiftCounter
+        dialog.className    = className;
+
+    let modalBack           = document.createElement('div');
+        modalBack.id        = id +'Back';
+        modalBack.className = 'modalBack';
+
+
+    dialog.appendToBody     = () => {
+        modalBack.appendChild(dialog);
+        document.body.appendChild(modalBack);
+    };
+    dialog.removeDialog     = () => {
+        modalBack.remove();
+    };
+
+    dialog.show             = () => {
+        modalBack.style.display  = 'block';
+        dialog.style.display     = 'block';
+    };
+    dialog.close            = () => {
+        if(closeMethod == 'remove') {
+            dialog.removeDialog();
+            return;
+        }
+        dialog.innerHTML         = '';
+        dialog.dataObj           = {};
+        modalBack.style.display  = 'none';
+        dialog.style.display     = 'none';
+    };
+    dialog.dataObj               = {};
+    dialog.setItems = (itemsObj) => {
+        for (const item in itemsObj) {
+            HDL_setDefButton( dialog, itemsObj[item] );
+        }
+    };
+
+    switch (closeOnClick) {
+        case 'non':
+            break;
+        case 'out':
+            modalBack.onclick = (e) => {
+                if(e.target.id == modalBack.id ) dialog.close(); };
+            break;
+        case 'all':
+            modalBack.onclick = () => {
+                dialog.close(); };
+            break;
+    }
+
+    return dialog;
+}
+
+
+
+
+
+
+
+
+//////TESTING/////////////////////////////TESTING///////////////////////////////////////////////TESTING
+//////                                 TESTING AREA
+//////TESTING/////////////////////////////TESTING///////////////////////////////////////////////TESTING
+
+
+function testLS() {
+    let LStestStr     = 'LStestStr';
+    localStorage.setItem( 'LStestRec', LStestStr );
+    let testRes       = ( localStorage.getItem('LStestRec') == LStestStr );
+    localStorage.removeItem( 'LStestRec' );
+    return testRes;
+}
+
+function encodeObj(obj, curSc) {
+    curSc             = curSc || CUR_SC;
+    let encodedObj    = encodeURIComponent( AUTH.xorObj(obj, curSc) );
+    return encodedObj;
+}
+
+function getLastProperty(obj, propChainStr) {
+    propChainStr.split('.')
+    .forEach( (prop) => {
+        if (
+            typeof obj != 'object'
+            ||     obj === null
+            ||   !(prop in obj)
+           ) { return obj; }
+        obj = obj[prop];
+    });
+    return obj;
+}
+
+function ttest() {
+    let reqObj = {
+        command: 'test',
+        data: 'no data'
+    };
+    HDL_Async_ShiftApi_JSONP_Request (reqObj)
+    .then( result => {
+        console.log( 'ttest() resp: ', result );
+    });
+}
+
+// let testObj = {
+//     l1: {
+//         l2:{
+//             l3:{
+//                 l4:7
+//             }
+//         }
+//     }
+// }
+// let testArr = [[[[]]]]
+// let tstr = 'l2.l3.l4'
+// console.log(getLastProperty(testObj, 'testObj.l1.l2.l3.l4'));
+// console.log( testObj.l2.l3.l4.l5.l6 instanceof Object);
+// console.log( testArr[0][0][0] instanceof Object);
+
+function testReq() {
+  let reqObj = {
+    command: 'getLog',
+    data: {
+        stDate:  '2020-04-20',
+        endDate: '2020-04-25',
+        notes:   'WebApp vacation test request'
+    },
+  };
+  HDL_Async_ShiftApi_JSONP_Request (reqObj);
+
+}
+
+
+
+
+
+
+
+
+

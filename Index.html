@@ -11,10 +11,14 @@
     <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
     <!-- startSrcCssBlock -->
-    <link rel="stylesheet" type="text/css" href="CSS/icons.css">
-    <link rel="stylesheet" type="text/css" href="CSS/tiny-date-picker.css">
-    <link rel="stylesheet" type="text/css" href="CSS/main.css">
-    <link rel="stylesheet" type="text/css" href="CSS/landScape.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/icons.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/tiny-date-picker.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/swal-add.css">
+
+    <link rel="stylesheet" type="text/css" href="./CSS/main.css">
+    <link rel="stylesheet" type="text/css" href="./CSS/m-table.css">
+
+    <link rel="stylesheet" type="text/css" href="./CSS/landScape.css">
     <!-- endSrcCssBlock -->
 
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-date-picker/3.2.8/tiny-date-picker.min.css">
@@ -66,16 +70,17 @@
     </div>
 
     <!-- startSrcJsBlock -->
-    <script src="JS/MY-date-range-picker.js"></script>
-    <script src="JS/apiHandler.js"></script>
-    <script src="JS/authModule.js"></script>
-    <script src="JS/googleModule.js"></script>
-    <script src="JS/swapShifts.js"></script>
-    <script src="JS/setTable.js"></script>
-    <script src="JS/requestShChange.js"></script>
+    <script src="./JS/MY-date-range-picker.js"></script>
+    <script src="./JS/apiHandler.js"></script>
+    <script src="./JS/authModule.js"></script>
+    <script src="./JS/googleModule.js"></script>
+    <script src="./JS/swapShifts.js"></script>
+    <script src="./JS/setTable.js"></script>
+    <script src="./JS/requestShChange.js"></script>
     <!-- endSrcJsBlock -->
 
     <script>
+        var PUBLIC_VERSION = '5.19.22.33' ;
         function ERROR_LOGGER(err, id = 'global') {
             var stack   =  err.error && err.error.stack;
             var message = `ERR_logger ${id}: \n`

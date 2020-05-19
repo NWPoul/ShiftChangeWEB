@@ -1,0 +1,233 @@
+/*MAIN TABLE STYLES*/
+    #mainTable {
+        --head-th0-bg: #d8e6f3;
+        --head-th0-ink: black;
+
+        --head-WDay-bg: #a0afd8;
+        --head-WDay-ink: navy;
+
+        --head-HDay-bg: #df4740;
+        --head-HDay-ink: #ffffff;
+
+        --fristLastDataCol-bg: Silver;
+        --fristLastDataCol-ink: Gray;
+        --maxDate-bg: Silver;
+        --maxDate-ink: Gray;
+
+
+        --group1-bg: #ffaeae;
+        --group11-bg: #fce5cd;
+        --group11-h-bg: #ffaeae;
+        --group1-day-bg: #ff5f5f;
+        --group1-night-bg: #da3d3d;
+
+        --group2-bg: #cce5fd;
+        --group21-bg: #ebf4fd;
+        --group21-h-bg: #cce5fd;
+        --group2-day-bg: #64c6ff;
+        --group2-night-bg: #589de4;
+
+        --group5-bg: #E9EEF1;
+        --group5-day-bg: #d8d8d8;
+        --group5-night-bg: #9a9a9a;
+
+
+        --joker-ink: red;
+        --zam1-ink: blue;
+        --zam0-bg: #ffffff;
+        --zam0-ink: #d7d7d7;
+
+        --zamDiv-bg: #1900ff;
+        --zamDiv-ink: #00fdff;
+        --zamDivEmpty-bg: #ffffff;
+        --zamDivEmpty-ink: #1900ff;
+
+        --check-bg: #AFCDE7;
+        --check-borderInk: #3e65ff;
+
+        --changed-bg: #0000ff;
+        --changed-ink: #ffffff;
+        --changed-borderInk: #929192;
+
+    }
+
+    #mainTable th {
+        position: sticky;
+        position: -webkit-sticky;
+        left: 0;
+        z-index: 1;
+
+        border-right-width: 2px;
+        padding: 2px 2px;
+        font-weight: bold
+    }
+
+    #mainTable #r0c0 {
+        top: 0; left: 0;
+        z-index: 10;
+        background-color: var(--head-th0-bg);
+    }
+
+
+    #mainTable td {
+        min-width: 3em;
+        height: 1.7em;
+        padding: 2px 2px;
+    }
+
+    #mainTable tr:first-child td {
+        position: sticky;
+        position: -webkit-sticky;
+        top: 0px;
+        z-index: 1;
+
+        background-color: var(--head-WDay-bg);
+        color: var(--head-WDay-ink);
+    }
+
+    #mainTable td:nth-child(2), td:last-child {
+        background-color: var(--fristLastDataCol-bg) !important;
+        color: var(--fristLastDataCol-ink) !important;
+    }
+
+    .maxDate {
+        background-color: var(--maxDate-bg) !important;
+        color: var(--maxDate-ink) !important
+    }
+
+
+
+
+
+    .joker {
+        color: var(--joker-ink);
+    }
+    .zam1 {
+        color: var(--zam1-ink);
+        font-style: italic;
+    }
+
+
+    .group1 {
+        background-color: var(--group1-bg);
+    }
+    .group1-h {
+        background-color: var(--group1-day-bg);
+    }
+    .group1-day,
+    .group11-day    {
+        background-color: var(--group1-day-bg);
+    }
+    .group1-night,
+    .group11-night {
+        background-color: var(--group1-night-bg);
+    }
+
+
+    .group2 {
+        background-color: var(--group2-bg);
+    }
+    .group2-h {
+        background-color: var(--group2-day-bg);
+    }
+    .group2-day,
+    .group21-day {
+        background-color: var(--group2-day-bg);
+    }
+    .group2-night,
+    .group21-night {
+        background-color: var(--group2-night-bg);
+    }
+
+    .group11 {
+        background-color: var(--group11-bg);
+    }
+    .group11-h {
+        background-color: var(--group1-bg);
+    }
+
+
+    .group21 {
+        background-color: var(--group21-bg);
+    }
+    .group21-h {
+        background-color: var(--group2-bg);
+    }
+
+
+    .group5 {
+        background-color: var(--group5-bg);
+    }
+    .group5-h,
+    .group5-day {
+        background-color: var(--group5-day-bg);
+    }
+    .group5-night {
+        background-color: var(--group5-night-bg);
+    }
+
+
+    .HDay {
+        background-color: var(--head-HDay-bg) !important;
+        color: var(--head-HDay-ink) !important;
+        font-weight: bold;
+    }
+    .zam0 {
+        background-color: var(--zam0-bg);
+        color: var(--zam0-ink) !important;
+    }
+    .zamReq,
+    .check,
+    .changed {
+        outline-offset: -2px;
+        outline-style: solid;
+        outline-width: 3px;
+        font-style: normal;
+    }
+    .zamReq {
+        /*     background-color: #929292;
+            color: #000000;
+            outline-color: #4e4e4e; */
+        outline: unset;
+        position: relative;
+            /* z-index:1; */
+    }
+    .zamDiv {
+        position: absolute;
+        bottom: 0; left: 0;
+
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+
+        line-height: 200%;
+        text-align: center;
+
+        background-color: var(--zamDiv-bg);
+        color: var(--zamDiv-ink);
+
+        animation: change-size 2s linear infinite;
+    }
+    .zamDivEmpty {
+        background-color: var(--zamDivEmpty-bg);
+        color: var(--zamDivEmpty-ink);
+    }
+
+    @keyframes change-size {
+        from { height: 90%; }
+        50%  { height: 15%; }
+        to   { height: 90%; }
+    }
+
+
+    .check {
+        background-color: var(--check-bg) !important;
+        outline-color: var(--check-borderInk);
+    }
+    .changed {
+        background-color: var(--changed-bg);
+        color: var(--changed-ink);
+        font-weight: bold;
+        outline-color: var(--changed-borderInk);
+    }
+/*END MAINTABLE STYLES*/

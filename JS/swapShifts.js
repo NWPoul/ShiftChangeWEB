@@ -4,7 +4,7 @@ G_MAXDATE_COL
 MAINTABLE_STATE
 RASP_DATA
 
-
+HDL_setDefButton
 */
 
 
@@ -205,8 +205,8 @@ function swapModule() {
 
     swSet.tdId.forEach(function(tdId, i) {
         var tdIndex         = parseTdIndex(tdId);
-        swSet.shiftDate[i]  = RASP_DATA[ 0 ]          [ tdIndex[1] ];
-        swSet.instr[i]      = RASP_DATA[ tdIndex[0] ] [ 0 ];
+        swSet.shiftDate[i]  = RASP_DATA[     0      ] [ tdIndex[1] ];
+        swSet.instr[i]      = RASP_DATA[ tdIndex[0] ] [     0      ];
         swSet.shiftRasp[i]  = RASP_DATA[ tdIndex[0] ] [ tdIndex[1] ];
         swSet.shiftTable[i] = document.getElementById(tdId).innerHTML;
     });
@@ -314,12 +314,11 @@ console.log(tdId);
       var setBlock           = document.createElement('div');
           setBlock.className = ( subset[0] == 'Ж' ) ? 'swSubsetH' : 'swSubsetV';
           subset.forEach( function(shift, j, subset)   {
-              SetSwOptionButton( setBlock, {
-                  innerHTML:   shift,
-                  className:  (subset[0] == 'Ж') ? 'Jbtn' : 'swOption Vmod',
-                  sType:      (subset[0] == 'Ж') ? 'Ж' : 'half',
-                  onclick:     function() { swapActionClick(this); }
-              });
+                HDL_setDefButton( setBlock, {
+                    innerHTML:   shift,
+                    className:  (subset[0] == 'Ж') ? 'Jbtn' : 'swOption Vmod',
+                    onclick:     function() { swapActionClick(this); }
+                });
           }); // end for each button
       dialogDiv.appendChild(setBlock);   }
   ); // end for each buttun sub set
@@ -350,7 +349,7 @@ console.log(tdId);
 function SetSwOptionButton( parent, propObj ) {
     let buttonClassName  = 'swOption';
     propObj.className    = buttonClassName;
-    setDefButton( parent, propObj );
+    HDL_setDefButton( parent, propObj );
 }//end service function SetSwOptionButton
 
 
@@ -384,7 +383,7 @@ function swapActionClick(button) {
     });
 
     var checkBtns;
-    if (button.sType == 'Ж') {
+    if (button.classList.contains('Jbtn')) {
         checkBtns = [ ...dialogDiv.getElementsByClassName('Vmod btnCheck') ]; // Фиксируем в массиве отмеченные кнопки со сменами Д* и Н* (им назначались соотв CSS clas)
         checkBtns.forEach( function(elem) {
             elem.classList.remove('btnCheck');
@@ -426,7 +425,7 @@ function cancelSwapClick() {
     closeDialog();
 } //===== END cancelSwap  ============================================ cancelSwap
 
-function submitlSwapClick(button) {
+function submitlSwapClick() {
     var dialogDiv  = document.getElementById('swapDialog');
     var newShift   = dialogDiv.swapData.newShift;
     var actTDiD    = dialogDiv.swapData.tdId;
@@ -438,7 +437,7 @@ function submitlSwapClick(button) {
     if (nextTdId) { swapDialogManual(nextTdId); }
 } //===== END submitlSwapClick  ===================================== submit Swap
 
-function manualRaspShift(button) {
+function manualRaspShift() {
     var dialogDiv = document.getElementById('swapDialog');
     var actTDiD   = dialogDiv.swapData.tdId;
     var newShift  = dialogDiv.swapData.shiftRasp;

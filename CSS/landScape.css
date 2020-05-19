@@ -12,12 +12,21 @@ button {
 table {
     font-size: 12px;
 }
-
 table, th, td {
     border-width: 1px
 }
 
 
+
+
+
+#swapDialog {
+    *font-size: 20px;
+    top:    auto;
+    bottom: 4vh;
+    *width: 50%;
+    *left:  45vw;
+}
 .manualSwHead {
     height: 1.5em;
     margin-top: 0em;
@@ -28,14 +37,22 @@ table, th, td {
     margin: 0.3em;
     height: 2em;
 }
-
+.swSubsetV .swOption {
+    /* font-size: 40px; */
+    display: inline;
+    width: 25%
+}
 
 
 .Hmod {
     display: inline-block;
     width: 39%
 }
-
+.Vmod {
+    display: inline-block;
+    width: 25%;
+    margin: 0.5% 1%;
+}
 .Jbtn {
     *font-size: 20px;
     width: 20%;
@@ -43,39 +60,27 @@ table, th, td {
     margin: 3%
 }
 
-.Vmod {
-    display: inline-block;
-    width: 25%;
-    margin: 0.5% 1%;
-}
 
-#swapDialog {
-    *font-size: 20px;
-    top: auto;
-    bottom: 2vh;
-    *left: 25vw;
-}
+
 
 #goToDiv {
     *font-size: 25px;
 }
-
-.swSubsetV {
-    display: inline;
+.summTable {
+    width: 50%
 }
+
+
 
 .swal-modal {
     width: 70%;
 }
-
 .swal-title {
     font-size: 22px;
 }
-
 .swal-text, .swal-button {
     font-size: 18px;
 }
-
 .swal-button--confirm {
     font-size: 20px;
 }
@@ -85,10 +90,9 @@ table, th, td {
 }
 
 @media all and (min-width: 900px) and (orientation: landscape) {
-    body {
+    /* body {
         background-color: cyan;
-    }
-
+    } */
     table {
         font-size: 16px;
     }
@@ -101,15 +105,12 @@ table, th, td {
     .swal-modal {
         width: 70%;
     }
-
     .swal-title {
         font-size: 22px;
     }
-
     .swal-text, .swal-button {
         font-size: 18px;
     }
-
     .swal-button--confirm {
         font-size: 20px;
     }

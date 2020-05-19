@@ -130,6 +130,7 @@ function logOut(appUserData = USER) {
     for (let key of Object.keys(appUserData) ) {
         appUserData[key]  = null;
     }
+    LOG_DATA = undefined;
     setLoginButtonText('Log in');
 }
 function setLoginButtonText(text) {
@@ -158,7 +159,7 @@ function loginButtonClick(button, appUserData = USER) {
         },
         getLog: {
             className: 'swOption',
-            innerHTML: 'Расчёт',
+            innerHTML: 'Отчёт',
             onclick: () => {
                 console.log('Запрос логов');
                 HDL_Async_showLogData();
@@ -176,7 +177,7 @@ function loginButtonClick(button, appUserData = USER) {
                 })
                 .then( (confirmation) => {
                     if (confirmation) {
-                        swal('Вы вышли из системы!', {icon: 'success'} );
+                        swal('Вы вышли из системы!', {icon: 'success', timer: 1500, buttons: false} );
                         logOut();
                     }
                 });
