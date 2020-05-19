@@ -717,7 +717,7 @@ function helpButtonClick() {
         <br>
         Если запрос нарушает правила - будет выдано предупреждение со списком нарушений<br>
         Если такой запрос все равно хотим отправить - нужно ввести комментраий/причину
-        ${window.PUBLIC_VERSION ? window.PUBLIC_VERSION : '...'}
+        ${window.PUBLIC_VERSION ? '<br>' +window.PUBLIC_VERSION : '<br>...'}
     `;
 
     helpDiv.innerHTML      = helpText;
