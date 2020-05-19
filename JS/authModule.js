@@ -42,6 +42,9 @@ function loginResponseHandler(ReqResult) {
 
         loginResponse    = Promise.resolve(`Пользователь ${userObj.nick}
                            успешно авторизован!`);
+    } else if ( clearedResponse.status == 201 ) {
+        loginResponse    = Promise.resolve( clearedResponse.content );
+
     } else {
         loginResponse    = Promise.reject(clearedResponse.content);
     }

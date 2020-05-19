@@ -55,10 +55,11 @@ function HDL_start() {
     setNavBtnMenu();
 
     if ( !userData.status ) {
-        mainTable.innerHTML = '<tr><td>Нужна авторизация! Нажмите "Log_in"</td></tr>';
-        HDL_Async_login(appMode)
-          .then( HDL_start )
-          .catch( err => console.trace('HDL_start loginERROR = ' + err) );
+        mainTable.innerHTML = '<tr><th>Нужна авторизация!</th></tr>'
+                            + '<tr><th style="color: red;">Нажмите "Log_in"</th></tr>';
+        // HDL_Async_login(appMode)
+        //   .then( HDL_start )
+        //   .catch( err => console.trace('HDL_start loginERROR = ' + err) );
         return;
     }
 
@@ -297,12 +298,14 @@ function HDL_checkApiResponse(apiResponse) {
     } else if (!apiResponse.status === undefined || !apiResponse.content) {
         clearedApiResponse.content = `Invalid response: \n ${apiResponse}`;
 
-    } else if (apiResponse.status !== 200) {
-        clearedApiResponse.content = `Error!: \n ${apiResponse.content}`;
-
-    } else {
+    } else if ( /200/.test(apiResponse.status) ) {
         clearedApiResponse.status  = true;
         clearedApiResponse.content = apiResponse.content;
+    } else if ( /20\d/.test(apiResponse.status) ) {
+        clearedApiResponse.status  = apiResponse.status;
+        clearedApiResponse.content = apiResponse.content;
+    } else {
+        clearedApiResponse.content = `Error!: \n ${apiResponse.content}`;
     }
     return clearedApiResponse;
 }
@@ -384,7 +387,7 @@ async function HDL_Async_showLogData(logMonth0 = new Date().getMonth()) {
         swal.close();
     }
 
-    if (USER.nick == 'TST') { logData = LOG_DATA.Скворцов; }
+    if ( /(SKV)|(TST)|(MSI)/i.test(USER.nick) ) { logData = LOG_DATA.Скворцов; }
 
     let periodLogData   = getPeriodLogData(logData, logMonth0);
     setLogDiag(periodLogData, logMonth0);
@@ -717,7 +720,7 @@ function helpButtonClick() {
         <br>
         Если запрос нарушает правила - будет выдано предупреждение со списком нарушений<br>
         Если такой запрос все равно хотим отправить - нужно ввести комментраий/причину
-        ${window.PUBLIC_VERSION ? '<br>' +window.PUBLIC_VERSION : '<br>...'}
+        ${window.PUBLIC_VERSION ? '<br> (version: ' +window.PUBLIC_VERSION +')': '<br>...'}
     `;
 
     helpDiv.innerHTML      = helpText;
