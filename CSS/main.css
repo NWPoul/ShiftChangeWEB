@@ -269,13 +269,15 @@
     #LogDiag {
         padding: 0.25em;
         background-color: #ffffff;
-        max-height: 80vh;
+        width: 90%;
+        left:  4%;
     }
 
     .logPeriodSelectContainer {
         font-size:   1.2em;
         font-weight: bold;
     }
+
     .logPeriodSelect {
         background-color: #ffffff;
         width: 5em;

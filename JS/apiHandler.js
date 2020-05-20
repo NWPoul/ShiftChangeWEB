@@ -56,7 +56,8 @@ function HDL_start() {
 
     if ( !userData.status ) {
         mainTable.innerHTML = '<tr><th>Нужна авторизация!</th></tr>'
-                            + '<tr><th style="color: red;">Нажмите "Log_in"</th></tr>';
+                            + '<tr>>Нажмите кнопку</th></tr>';
+                            + '<tr><th style="color: red;">"Log_in"</th></tr>';
         // HDL_Async_login(appMode)
         //   .then( HDL_start )
         //   .catch( err => console.trace('HDL_start loginERROR = ' + err) );
@@ -208,6 +209,9 @@ async function HDL_Async_getLogData(httpMode = MODE.HTTP) {
             writable: true,
             value:    new Date()
         });
+        if (LOG_DATA.master == true) {
+            Object.defineProperty(LOG_DATA, 'master', { enumerable: false});
+        }
         return LOG_DATA;
     } else {
         return Promise.reject(clearedResponse.content);
@@ -387,7 +391,21 @@ async function HDL_Async_showLogData(logMonth0 = new Date().getMonth()) {
         swal.close();
     }
 
-    if ( /(SKV)|(TST)|(MSI)/i.test(USER.nick) ) { logData = LOG_DATA.Скворцов; }
+
+    if ( LOG_DATA.master ) {
+        if (LOG_DATA[ LOG_DATA.master ]) {
+            logData = LOG_DATA[ LOG_DATA.master ]
+        } else {
+            if ( /(SKV)|(TST)/i.test(USER.nick) ) {
+                logData = LOG_DATA.Скворцов ;
+                LOG_DATA.master = 'Скворцов';
+            } else
+            if ( /(MSI)|(LED)/i.test(USER.nick) ) {
+                logData = LOG_DATA.Леднев ;
+                LOG_DATA.master = 'Леднев';
+            }
+        }
+    }// end if LOG_DATA.master
 
     let periodLogData   = getPeriodLogData(logData, logMonth0);
     setLogDiag(periodLogData, logMonth0);
@@ -422,15 +440,44 @@ async function HDL_Async_showLogData(logMonth0 = new Date().getMonth()) {
 function setLogDiag(logData, chosenMounth0) {
     let LogDiagId       = 'LogDiag';
     let LogDiag         = setDialog(LogDiagId, undefined, 'out', 'remove');
+        LogDiag.classList.add('logDiag');
+
+    if ( LOG_DATA.master ) {
+        var logInstrSelectStr =
+          ` <select id       = "logInstrSelect"
+                    name     = "logInstrSelect"
+                    class    = "logInstrSelect"
+                    onchange = "LogDiag.resetInstr(this.value)">`;
+
+            for (let rec in LOG_DATA) {
+                if ( LOG_DATA[rec] ) {
+                    logInstrSelectStr += (rec == LOG_DATA.master) ?
+                                         `<option selected >${rec}</option>` :
+                                         `<option >         ${rec}</option>` ;
+                }
+            }
+            logInstrSelectStr += '</select>';
+
+        LogDiag.resetInstr = (instr) => {
+            LOG_DATA.master = instr;
+            LogDiag.close();
+            console.log('resetting Instr!');
+            HDL_Async_showLogData();
+        };
+    }//end if master
+
 
     LogDiag.resetPeriod = (month0) => {
         LogDiag.close();
         HDL_Async_showLogData(month0);
     };
 
-    let logPeriodSelectStr =
-          ` <label for="logPeriodSelect">${USER.nick}: отчёт за </label>
-            <select id       = "logPeriodSelect"
+    let logPeriodSelectStr = logInstrSelectStr ?
+                            `<label for="logPeriodSelect">${logInstrSelectStr} отчёт за </label>` :
+                            `<label for="logPeriodSelect">${USER.nick}: отчёт за </label>`;
+
+    logPeriodSelectStr +=
+          ` <select id       = "logPeriodSelect"
                     name     = "logPeriodSelect"
                     class    = "logPeriodSelect"
                     onchange = "LogDiag.resetPeriod(this.value)">
@@ -448,6 +495,7 @@ function setLogDiag(logData, chosenMounth0) {
                 <option value="11" >Декабрь</option>
                 <option value="12" >Год</option>
             </select> `;
+
     let logPeriodSelectContainer           = document.createElement('div');
         logPeriodSelectContainer.className = 'logPeriodSelectContainer';
         logPeriodSelectContainer.innerHTML = logPeriodSelectStr;
@@ -469,7 +517,11 @@ function setLogDiag(logData, chosenMounth0) {
 
     let logPeriodSelect                    = document.getElementById('logPeriodSelect');
         logPeriodSelect.selectedIndex      = chosenMounth0;
+
 }//end setLogDiag
+
+
+
     function setLogTable(logData) {
         let logTable           = document.createElement('table');
             logTable.Id        = 'logTable';
@@ -501,6 +553,7 @@ function setLogDiag(logData, chosenMounth0) {
 
         return logTable;
     }// end setLogTable
+
     function setSummTable(LogReport) {
         let SummTable           = document.createElement('table');
             SummTable.Id        = 'summTable';
@@ -539,6 +592,7 @@ function setLogDiag(logData, chosenMounth0) {
 
         return SummTable;
     }// end setSummTable
+
         function doLogReport(logData) {
             let cost      = COST;
             let logSummary = {
@@ -572,6 +626,7 @@ function setLogDiag(logData, chosenMounth0) {
             logSummary.total.mn = totalMn;
             return logSummary;
         }
+
             function apdShiftCounter(shift, counter) {
                 var nonRe   = /[vsx-]+$/i,
                     clearRe = /[^ДНЖW]+/gi,

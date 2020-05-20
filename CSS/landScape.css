@@ -66,6 +66,11 @@ table, th, td {
 #goToDiv {
     *font-size: 25px;
 }
+
+#LogDiag {
+    width: 70%;
+    left:  15%;
+}
 .summTable {
     width: 50%
 }
