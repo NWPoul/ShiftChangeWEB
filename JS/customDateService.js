@@ -1,6 +1,7 @@
 (
 function setDateRangePicker() { 'use strict';
-	var exports = window;
+  window.dateService = {};
+  var exports = window.dateService;
   /**
    * @file A generic set of mutation-free date functions.
    */
@@ -248,7 +249,7 @@ function setDateRangePicker() { 'use strict';
   function defaults() {
     return {
       lang: russian,
-	  dayOffset: 1,
+      dayOffset: 1,
 
       // Possible values: dp-modal, dp-below, dp-permanent
       mode: 'dp-modal',
@@ -258,7 +259,7 @@ function setDateRangePicker() { 'use strict';
       hilightedDate: now(),
 
       format: function (dt) {
-        return (dt.getMonth() + 1) + '/' + dt.getDate() + '/' + dt.getFullYear();
+        return dt.getFullYear() + '/' + (dt.getMonth() + 1) + '/' + dt.getDate() ;
       },
 
       parse: function (str) {
@@ -1329,7 +1330,7 @@ function setDateRangePicker() { 'use strict';
         if (e.target.classList.contains('dp-day')) {
           var dt = new Date(parseInt(e.target.dataset.date));
           var changed = !datesEq(dt, hoverDate);
-    
+
           if (changed) {
             hoverDate = dt;
             rerender();
@@ -1376,9 +1377,11 @@ function setDateRangePicker() { 'use strict';
     return (dt < end && dt >= start) || (dt <= start && dt > end);
   }
 
-  exports.TinyDatePicker = TinyDatePicker$1;
-  exports.DateRangePicker = DateRangePicker;
+  exports.datePicker = TinyDatePicker$1;
+  exports.rangePicker = DateRangePicker;
+
+  // exports
 
   Object.defineProperty(exports, '__esModule', { value: true });
-}//END setDateRangePicker 
+}//END setDateRangePicker
 )();

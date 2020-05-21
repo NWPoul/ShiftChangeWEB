@@ -1,7 +1,7 @@
 
 //GLOBAL NAME SPACE
 
-var MODE = { ENV: 'GIT', HTTP:'JSONP' };
+var MODE = { ENV: 'GIT', HTTP: 'JSONP' };
 var CUR_SHIFTAPI_URL = 'https://script.google.com/macros/s/AKfycbye8JAXiJfseuPCq-X8z7CWqEc6vq-y9GqjhpFk8ump2Rx-HQ/exec';
 
 var SHIFTAPI_reqHeader  = 'webAppReq';
@@ -667,21 +667,28 @@ function setVacationRequestDiag() {
         date = (Object.prototype.toString.call(date) === '[object Date]') ?
                 date :
                 new Date(date);
-        vacationReqDiag.dataObj[dateSide] = date.toLocaleDateString();
+        vacationReqDiag.dataObj[dateSide] = date.toLocaleDateString('ru-RU');
     };
 
     vacationReqDiag.initDatePicker = () => {
-        var TinyDatePicker = window.TinyDatePicker;
+        var datePicker = window.dateService.datePicker;
         var dpCustomOpt = {
-            format(date) { return date.toLocaleDateString(); }
+            format(date) {
+                return date.toLocaleDateString('ru-RU');
+            },
+            parse(str) {
+                var dateArr = str.split('.');
+                var date = new Date(`${dateArr[2]}-${dateArr[1]}-${dateArr[0]}`);
+                return isNaN(date) ? new Date() : date;
+            }
         };
-        var dpWStDate  = TinyDatePicker('#WStDate',  dpCustomOpt)
+        var dpWStDate  = datePicker('#WStDate',  dpCustomOpt)
             .on('select', (_, dp) => {
                 vacationReqDiag.setDate('startDate', dp.state.selectedDate);
                 console.log(dp.state.selectedDate);
             });
 
-        var dpWEndDate = TinyDatePicker('#WEndDate', dpCustomOpt)
+        var dpWEndDate = datePicker('#WEndDate', dpCustomOpt)
             .on('select', (_, dp) => {
                 vacationReqDiag.setDate('endDate', dp.state.selectedDate);
                 console.log(dp.state.selectedDate);
