@@ -56,7 +56,7 @@ function HDL_start() {
 
     if ( !userData.status ) {
         mainTable.innerHTML = '<tr><th>Нужна авторизация!</th></tr>'
-                            + '<tr>>Нажмите кнопку</th></tr>';
+                            + '<tr><th>Нажмите кнопку</th></tr>'
                             + '<tr><th style="color: red;">"Log_in"</th></tr>';
         // HDL_Async_login(appMode)
         //   .then( HDL_start )

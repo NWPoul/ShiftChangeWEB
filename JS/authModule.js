@@ -12,15 +12,50 @@ var AUTH = (function() {
 
 // Start login process
 async function Async_logIn() {
-    let user                    = prompt('введите Ваш e-mail или ник в системе', '');
+    // let user                    = prompt('введите Ваш e-mail или ник в системе', '');
+    // if (!user) {
+    //     swal('e-mail/ник обязателен!');
+    //     return Promise.reject( 'No e-mail/nick entered' );
+    // }
+    // let ps                      = prompt('введите Ваш пароль в системе или "?" для отправки пароля на e-mail', '');
+
+    let user = await swal({
+        content: {
+            element:    'input',
+            attributes: {
+                placeholder: 'введите Ваш e-mail или ник в системе'
+            },
+        },
+    });
+
     if (!user) {
         swal('e-mail/ник обязателен!');
         return Promise.reject( 'No e-mail/nick entered' );
     }
 
-    let ps                      = prompt('введите Ваш пароль в системе или "?" для отправки пароля на e-mail', '');
-    let reqResult               = await Async_loginRequest(user, ps);
+    let ps = await swal({
+        content: {
+            element:    'input',
+            attributes: {
+                placeholder: 'введите Ваш пароль'
+            },
+        },
+        buttons: {
+            cancel:  false,
+            confirm: 'OK',
+            restore: {
+                text:  'забыл',
+                value: '?',
+            },
+        }
+    });
 
+    if (!ps) {
+        swal('пароль обязателен!');
+        return Promise.reject( 'No pass entered' );
+    }
+
+    let reqResult = await Async_loginRequest(user, ps);
     return loginResponseHandler( reqResult );
 } //END AUTH.LOGIN FUNCTION ======================================
 
@@ -142,6 +177,8 @@ function setLoginButtonText(text) {
     var loginBtnTxt       = document.getElementById('loginBtnTxt');
     loginBtnTxt.innerText = text;
 }
+
+
 
 function loginButtonClick(button, appUserData = USER) {
     if (!appUserData.status) {
