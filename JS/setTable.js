@@ -10,6 +10,8 @@ HDL_Async_getPrevReqData
 HDL_Async_getRaspData
 
 SWP_changeShift
+
+cellOnClick2swap
 */
 
 
@@ -28,9 +30,7 @@ function defineMaxDateCol(raspFirstDate, maxDate, maxCols) {
 
 function STB_SetMainTable(raspDataArr) {
     var mainTable           = document.getElementById('mainTable');
-        // if (!raspDataArr || !raspDataArr[0] || raspDataArr[0][0] != 'Инструктор' ) {
-        //   return;
-        // } // TO DO - fix ugly validation condition!
+
   try {
     // ИСПРАВИТЬ потом - MAGIC NUMBERS!
     G_MAXDATE_COL           = defineMaxDateCol( raspDataArr[0][1][0], G_MAXDATE, G_MAXDATE_COL);
@@ -128,16 +128,15 @@ function TDconcat(Arr, tbody) {
 
   for(var i = 0; i < rowsN; i++){
     var tr = document.createElement('tr');
-    var rowStr = '';
-		rowStr += '<th id="r' +i +'c0">' +
-                          Arr[i][0] +
-                '</th>';
+    var rowStr = `<th id="r${i}c0">` +
+                         Arr[i][0] +
+                 '</th>';
 
     for (var j = 1; j < colsN; j++) {
-      var tdID = 'r' +i +'c' +j;
-      rowStr += '<td id="' +tdID +'">' +
-                          Arr[i][j] +
-                '</td>';
+      var tdID = 'r'+i  +'c'+j;
+      rowStr  += `<td id="${tdID}">` +
+                        Arr[i][j] +
+                 '</td>';
     }
     tr.innerHTML = rowStr;
     tbody.appendChild(tr);
@@ -147,9 +146,11 @@ function TDconcat(Arr, tbody) {
     var firstRow = tbody.rows[0];
     for (var ri = colsN; --ri >0;) {
       var curDateData = Arr[0][ri];
-      var dateStr = curDateData[2] + '/' + ( 1+curDateData[1] ) + '<br>' + curDateData[3]; //curDateData[1]+1 т.к. месяцы с 0 в JS
+      var dateStr     = `${curDateData[2]}/${1+curDateData[1]}`
+                      + '<br>'
+                      + curDateData[3]; //curDateData[1]+1 т.к. месяцы с 0 в JS
       firstRow.cells[ri].innerHTML = dateStr;
-      firstRow.cells[ri].HDay = curDateData[4];
+      firstRow.cells[ri].HDay      = curDateData[4];
     }
 
 return(tbody);

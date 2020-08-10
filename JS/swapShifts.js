@@ -25,17 +25,22 @@ console.log(event.type);
   var actTD = event.target;
   var actTDiD = actTD.id;
 
+  console.log(event.type);
+
+  if (event.type == 'contextmenu') {
+      event.preventDefault();
+      SWP_DialogData.checkedTdIds = [];
+      swapDialogManual(actTDiD);
+      return false;
+  }
+
   if (MAINTABLE_STATE.tdChecked[actTDiD]) {
       uncheckTD(actTD);
   } else {
       checkTD(actTD);
-      if (event.type == 'contextmenu') {
-          SWP_DialogData.checkedTdIds = [];
-          swapDialogManual(actTDiD);
-          return false;
-      }
       if (MAINTABLE_STATE.checkCnt == 2) { swapModule(); }    // function swapModule() is on swapDialog.html file!
   }
+
 }//=================================== END table On Click for SWAP
 
 

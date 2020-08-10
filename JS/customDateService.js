@@ -116,6 +116,11 @@ function setDateRangePicker() { 'use strict';
     };
   }
 
+  function ruParse(dateStrRu) {
+      let dateArr = dateStrRu.split('.');
+      return new Date(dateArr[2], dateArr[1]-1, dateArr[0]);
+  }
+
   /**
    * constrainDate returns dt or min/max depending on whether dt is out of bounds (inclusive)
    *
@@ -1377,8 +1382,10 @@ function setDateRangePicker() { 'use strict';
     return (dt < end && dt >= start) || (dt <= start && dt > end);
   }
 
-  exports.datePicker = TinyDatePicker$1;
+  exports.datePicker  = TinyDatePicker$1;
   exports.rangePicker = DateRangePicker;
+  exports.dateOrParse = dateOrParse;
+  exports.ruParse     = ruParse;
 
   // exports
 

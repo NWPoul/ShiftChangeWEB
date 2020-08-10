@@ -16,10 +16,29 @@ var MAINTABLE_STATE;            // объект с состоянием осно
 var G_MAXDATE           = 0;    // or = Date.parse('YYYY-MM-DD'); ms, (0 = not limit) latest date for request
 var G_MAXDATE_COL       = 21;
 var COST                = {
-        shift:             3000,
-        w:                 1500,
-        hr:                350
+        '01.02.2020': {
+            shift:  3000,
+            w:      1500,
+            hr:     350
+        },
+        '01.07.2020': {
+            shift:  3500,
+            w:      1500,
+            hr:     350
+        },
 };
+Object.defineProperty(COST, 'getForDate', {
+    value: function ( forDate ) {
+        let costForDate = {shift: 0, w: 0, hr: 350};
+        for (var dateStr in COST) {
+            let curDate = dateService.ruParse(dateStr);
+            if (forDate >= curDate) {
+                costForDate = COST[dateStr];
+            }
+        }
+        return costForDate;
+    }
+});
 
 var CUR_SC              = 'Tff-23723';
 var USER                = {
@@ -35,9 +54,10 @@ var USER                = {
 AUTH
 GAS
 TEST_APIanswer
-ERROR_LOGGER
 
 STB_SetMainTable
+
+dateService
 */
 ///// ===== END GLOBAL NAME SPACE =====
 
@@ -438,8 +458,12 @@ async function HDL_Async_showLogData(logMonth0 = new Date().getMonth()) {
 
 
 function setLogDiag(logData, chosenMounth0) {
-    let LogDiagId       = 'LogDiag';
-    let LogDiag         = setDialog(LogDiagId, undefined, 'out', 'remove');
+    let optObj = {
+            id:           'LogDiag',
+            closeOnClick: 'out',
+            closeMethod:  'remove'
+        };
+    let LogDiag         = setDialog(optObj);
         LogDiag.classList.add('logDiag');
 
     if ( LOG_DATA.master ) {
@@ -594,7 +618,6 @@ function setLogDiag(logData, chosenMounth0) {
     }// end setSummTable
 
         function doLogReport(logData) {
-            let cost      = COST;
             let logSummary = {
                     shift:   { cnt: 0, mn: 0 },
                     w:       { cnt: 0, mn: 0 },
@@ -603,7 +626,9 @@ function setLogDiag(logData, chosenMounth0) {
                     penalty: { mn:  0 },
                     total:   { mn:  0}
             };
+
             for (let date in logData) {
+                let cost     = COST.getForDate( dateService.ruParse(date) );
                 let dateRec  = logData[date];
                 let curShift = dateRec.shift;
                 if (curShift) {
@@ -648,8 +673,12 @@ function setLogDiag(logData, chosenMounth0) {
 
 
 function setVacationRequestDiag() {
-    let vacationReqDiagId       = 'vacationReqDiag';
-    let vacationReqDiag         = setDialog(vacationReqDiagId, undefined, 'out', 'remove');
+    let optObj = {
+            id:           'vacationReqDiag',
+            closeOnClick: 'out',
+            closeMethod:  'remove'
+        };
+    let vacationReqDiag         = setDialog(optObj);
 
     vacationReqDiag.addNotes    = () => {
         let notes = prompt('Введите комментарий:');
@@ -744,8 +773,12 @@ function setVacationRequestDiag() {
 
 
 function setNavBtnMenu() {
-    let navBtnMenuId    = 'navBtnDialog';
-    let navBtnMenu = setDialog(navBtnMenuId, undefined, 'all', 'hide');
+    let optObj = {
+            id:           'navBtnDialog',
+            closeOnClick: 'all',
+            closeMethod:  'hide'
+        };
+    let navBtnMenu = setDialog(optObj);
     navBtnMenu.appendToBody();
 
     return navBtnMenu;
@@ -795,7 +828,7 @@ function helpButtonClick() {
 
 
 
-function HDL_setDefButton( parent, propObj) {
+function HDL_setDefButton( parent, propObj ) {
     let button            = document.createElement('button');
     for (let prop in propObj) {
         button[prop]      = propObj[prop];
@@ -803,16 +836,24 @@ function HDL_setDefButton( parent, propObj) {
     parent.appendChild(button);
   }//end service function HDL_setDefButton
 
-function setDialog(id = 'defDialogDiv', className='dialogDiv', closeOnClick='non', closeMethod='hide') {
-    let dialog              = document.getElementById(id);
-        if( !dialog ) {
-             dialog         = document.createElement('div');
-             dialog.id      = id;
-        }
+
+
+function setDialog( diagOptionsObj = {} ) {
+    let { id           = 'defDialogDiv',
+          className    = 'dialogDiv',
+          closeOnClick = 'non',
+          closeMethod  = 'hide'
+    } = diagOptionsObj;
+
+    let dialog              = document.getElementById(id) ||
+                              document.createElement('div');
+        dialog.id           = id;
         dialog.className    = className;
 
-    let modalBack           = document.createElement('div');
-        modalBack.id        = id +'Back';
+    let modalBackId         = dialog.id +'Back';
+    let modalBack           = document.getElementById(modalBackId) ||
+                              document.createElement('div');
+        modalBack.id        = modalBackId;
         modalBack.className = 'modalBack';
 
 
@@ -859,7 +900,7 @@ function setDialog(id = 'defDialogDiv', className='dialogDiv', closeOnClick='non
     }
 
     return dialog;
-}
+}//END setDialog
 
 
 
@@ -938,12 +979,5 @@ function testReq() {
   HDL_Async_ShiftApi_JSONP_Request (reqObj);
 
 }
-
-
-
-
-
-
-
 
 
