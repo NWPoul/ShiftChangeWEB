@@ -17,7 +17,7 @@ cellOnClick2swap
 
 function defineMaxDateCol(raspFirstDate, maxDate, maxCols) {
     if ( !raspFirstDate || (!maxDate && !maxCols) ) return false;
-    var maxColCorrection = 2; // ИСПРАВИТЬ потом - 2 MAGIC NUMBER (for header and yesterday column)!;
+    var maxColCorrection = 0; // ИСПРАВИТЬ потом - 2 MAGIC NUMBER (for header and yesterday column)!;
 
     if (!maxDate)    return ( maxCols + maxColCorrection );
     maxCols        = maxCols || 0;
