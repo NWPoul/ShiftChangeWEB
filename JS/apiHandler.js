@@ -14,7 +14,7 @@ var LOG_DATA;                   // объект с данными по стат�
 var MAINTABLE_STATE;            // объект с состоянием основной таблицы
 
 var G_MAXDATE           = 0;    // or = Date.parse('YYYY-MM-DD'); ms, (0 = not limit) latest date for request
-var G_MAXDATE_COL       = 21;
+var G_MAXDATE_COL       = 25;
 var COST                = {
         '01.02.2020': {
             shift:  3000,
