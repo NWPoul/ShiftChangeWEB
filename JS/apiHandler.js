@@ -108,9 +108,9 @@ function HDL_getUser(appMode) {
 
         case 'DEV':
             userObj.status  = 'test';
-            userObj.nick    = 'TST';
-            userObj.ps      = 'tstps';
-            userObj.mail    = 'nwpoul@ya.ru';
+            userObj.nick    = 'TTE';
+            userObj.ps      = 'TTE';
+            userObj.mail    = '';
             break;
     }
     return userObj;
