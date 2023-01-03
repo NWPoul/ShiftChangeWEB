@@ -2,7 +2,7 @@
 //GLOBAL NAME SPACE
 
 var MODE = { ENV: 'GIT', HTTP: 'JSONP' };
-var CUR_SHIFTAPI_URL = 'https://script.google.com/macros/s/AKfycbye8JAXiJfseuPCq-X8z7CWqEc6vq-y9GqjhpFk8ump2Rx-HQ/exec';
+var CUR_SHIFTAPI_URL = 'https://script.google.com/macros/s/AKfycbxqZvDz-fyISmpQ-WO3ulSGIVOBHKHv_H45X24Jg1em-Ms5BEF1ptpNR90n5H0i7HM/exec';
 
 var SHIFTAPI_reqHeader  = 'webAppReq';
 
