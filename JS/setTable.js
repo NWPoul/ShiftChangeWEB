@@ -176,22 +176,26 @@ function condFormat(tbody) {
     var tr = rowsCollection[ri];
     var groupName;
     switch (true) {
-        case (ri > 14):
+        case (ri > 9):
             groupName = 'group5';
            break;
 
-        case (ri<13 && ri>9):
-            groupName = 'group21';
-           break;
-        case (ri<6 && ri>2):
-            groupName = 'group11';
-           break;
+        // case (ri<13 && ri>9):
+        //     groupName = 'group21';
+        //    break;
+        // case (ri<6 && ri>2):
+        //     groupName = 'group11';
+        //    break;
 
-        case (ri <= 7):
+        case (ri <= 3):
             groupName = 'group1';
            break;
 
-        case (ri <= 14):
+        case (ri <= 6):
+            groupName = 'group11';
+           break;
+
+        case (ri <= 9):
             groupName = 'group2';
            break;
      }//end switch
