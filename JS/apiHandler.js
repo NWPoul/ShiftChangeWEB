@@ -31,6 +31,11 @@ var COST                = {
             w:      2000,
             hr:     400
         },
+        '01.01.2024': {
+            shift:  4500,
+            w:      2250,
+            hr:     450
+        },
 };
 Object.defineProperty(COST, 'getForDate', {
     value: function ( forDate ) {
