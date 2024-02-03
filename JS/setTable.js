@@ -176,28 +176,21 @@ function condFormat(tbody) {
     var tr = rowsCollection[ri];
     var groupName;
     switch (true) {
-        case (ri > 9):
+        case (ri > 10):
             groupName = 'group5';
            break;
-
-        // case (ri<13 && ri>9):
-        //     groupName = 'group21';
-        //    break;
-        // case (ri<6 && ri>2):
-        //     groupName = 'group11';
-        //    break;
-
-        case (ri <= 3):
+        case (ri <= 2):
             groupName = 'group1';
            break;
-
-        case (ri <= 6):
-            groupName = 'group11';
-           break;
-
-        case (ri <= 9):
+        case (ri <= 5):
             groupName = 'group2';
            break;
+        case (ri <= 8):
+            groupName = 'group3';
+           break;
+        case (ri <= 10):
+            groupName = 'group4';
+            break;
      }//end switch
 
 
@@ -222,9 +215,9 @@ function condFormat(tbody) {
         } else
           if (/[ДЖ]/i.test(td.innerHTML) ) {
            td.classList.add(groupName + '-day');
-        } if ( /[Н]/i.test(td.innerHTML) ) {
-           td.classList.add(groupName + '-night');
-        } if ( /[Ж]/i.test(td.innerHTML) ) {
+        // } if ( /[Н]/i.test(td.innerHTML) ) {
+        //    td.classList.add(groupName + '-night');
+        } if ( /[J]/i.test(td.innerHTML) ) {
            td.classList.add('joker');
         } if ( /[*]/i.test(td.innerHTML) ) {
            td.classList.add('zam1');
