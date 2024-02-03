@@ -1,16 +1,16 @@
 /*normalizecss v801*/button,hr,input{overflow:visible}progress,sub,sup{vertical-align:baseline}html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0;font-family:Tahoma}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}
 
-  body {
+body {
     -webkit-touch-callout: none !important;
-    -webkit-user-select:   none !important;
-  }
+    -webkit-user-select  : none !important;
+    user-select          : none !important;
+}
 
-    button {
-    /* font-size: 30px; */
+button {
     height: 2em
-    }
+}
 
-    .inner {
+.inner {
     overflow-x: scroll;
     overflow-y: visible;
 
@@ -22,10 +22,10 @@
     border-style: solid;
     border-color: black;
     border-radius: 5px
-    }
+}
 
 
-    table {
+table {
     font-size: 1.8vh;
     font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
     border-spacing: 0;
@@ -34,311 +34,311 @@
 
     width: 100%;
     white-space: nowrap
-    }
-    table, th, td {
+}
+table, th, td {
     border-style: solid;
     border-color: white;
     border-width: 1px
+}
+
+
+
+
+#navBar {
+    display:      inline-flex;
+    width:        98vw;
+    white-space:  nowrap;
+    margin:       1vh 0.5vw;
+}
+
+.navButton {
+    min-width:    3em;
+    margin-right: 0.5em;
+}
+
+#loginButton {
+    min-width:    5em;
+    text-align:   start;
+}
+#loginBtnTxt {
+    vertical-align: middle;
+}
+
+#helpButton {
+    min-width:    2em;
+}
+
+
+
+
+
+
+
+/*SWAP DIAG STYLES*/
+.btnCheck {
+    background-color: #AFCDE7;
+}
+.btnCheck:hover {
+    background-color: #91c7f5;
+}
+
+.swHead {
+    line-height: 150%;
+    margin-bottom: 0em;
+    margin-top: 0.5em;
+    height: 3em;
+}
+
+.manualSwHead {
+    width: 80%;
+}
+
+.swOption {
+    /* font-size: 40px; */
+    display: block;
+    width: 80%;
+    height: 2.5em;
+    text-align: -webkit-center;
+    margin: 0.5em;}
+
+.Jbtn {
+    /* font-size: 40px; */
+    display: inline-block;
+    width: 27%;
+    height: 2em;
+    border-radius: 10px;
+    text-align: center;
+    margin: 3%
+}
+
+.Vmod {
+    width: 90%;
+}
+
+
+
+#swapDialog,
+#goToDiv,
+#navBtnDialog {
+    display:    none;
+    position:   fixed;
+    /* font-size: 40px; */
+    width:  72vw;
+    top:    15vh;
+    left:   15vw;
+    z-index: 5;
+
+    background: rgba(205, 214, 219, 0.7);
+
+    /* padding: 0.5em; */
+
+    text-align: -webkit-center;
+
+    border-style:   solid;
+    border-color: black;
+    border-radius:  10px;
+}
+
+.modalBack {
+    display:  none;
+    position: fixed;
+    top:      0;
+    left:     0;
+    z-index:  5;
+
+    width:  100%;
+    height: 100%;
+
+    background: rgba(4, 29, 253, 0.233);
+
+    text-align: -webkit-center;
+}
+
+
+.dialogDiv {
+    display:  none;
+    position: fixed;
+    /* font-size: 40px; */
+    width:   75vw;
+    top:     15vh;
+    left:    15vw;
+    z-index: 5;
+
+    background: rgba(205, 214, 219, 0.7);
+
+    padding: 0.25em;
+
+    text-align: -webkit-center;
+
+    border-style: solid;
+    border-color: black;
+    border-radius: 10px;
+}
+
+
+.vacDiag-dateButton {
+    position:   relative;
+    min-width:  7em;
+    /* background-color: deepskyblue; */
+}
+
+.vacDiag-actionButton {
+    position:   relative;
+    display:    block;
+    width:      16em;
+    height:     2.5em;
+    margin:     0.5em
+}
+.vacDiag-dateInputContainer {
+    position:   relative;
+    display:    inline-block;
+    text-align: center;
+    width:      40%;
+    min-width:  7em;
+    /* background-color: deepskyblue; */
+}
+
+.dp-dateInput {
+    width:   90%;
+    padding: 5px;
+    border:  2px solid #DDD;
+    border-radius: 4px;
+    text-align:    center;
+}
+.dp-modal {
+    z-index: 5;
+}
+
+
+
+
+
+
+
+
+.swSubsetV {
+    display: inline-block;
+    width:   45%;
+    /* text-align: center; */
+    /* margin: auto; */
+}
+
+.swSubsetH {
+    display: block;
+    /* text-align: center; */
+    /* margin: auto */
+}
+
+.swSubsetH .swOption {
+    /* font-size: 40px; */
+    display: inline-block;
+    width: 25%;
+}
+
+
+
+
+
+.helpTexpP {
+    text-align: left;
+    margin: 0;
+}
+
+
+
+
+
+
+#curtain {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    min-width: 10vw;
+    min-height: 70vh;
+
+    background-color: rgba(0, 0, 253, 0.39);
+}
+
+.curtain {
+    position: absolute;
+    top: 0;
+    min-height: 50em;
+    min-width: calc( var(--maxDate-ColsLeft) * var(--td-minWidth) );
+    background-color: #1f48ce82;
     }
 
 
 
 
-	#navBar {
-        display:      inline-flex;
-        width:        98vw;
-        white-space:  nowrap;
-        margin:       1vh 0.5vw;
+#LogDiag {
+    padding: 0.25em;
+    background-color: #ffffff;
+    width: 90%;
+    left:  4%;
+}
+
+.logPeriodSelectContainer {
+    font-size:   1.2em;
+    font-weight: bold;
+}
+
+.logPeriodSelect {
+    background-color: #ffffff;
+    width: 5em;
+    border-radius: 0.25em;
+}
+
+.logTableContainer {
+    max-height: 45vh;
+    overflow-x: scroll;
+    overflow-y: scroll;
+}
+
+
+.summTable {
+    margin:         0.3em 0em;
+    border-style:   none;
+    border-spacing: 1px;
+}
+.summTable th,
+.summTable td {
+    border-style: inherit;
+}
+.summTable .st-cnt {
+    text-align: right;
+}
+
+.logTable .th {
+    position: sticky;
+    position: -webkit-sticky;
+    z-index: 1;
+}
+
+.logTable td {
+    text-align:left;
+    padding-left: 1em;
+}
+
+.logTable .th-rows {
+    left: 0;
+    background-color: #ffffff;
+
+    font-weight:100;
+
+}
+
+.logTable .th-cols,
+.logTable .th0 {
+    top:      0;
+    height: 1.5em;
+    background-color: rgb(226, 240, 255);
+}
+.logTable .th0 {
+    left: 0;
+    z-index: 10;
     }
-
-    .navButton {
-        min-width:    3em;
-        margin-right: 0.5em;
-    }
-
-    #loginButton {
-        min-width:    5em;
-        text-align:   start;
-    }
-    #loginBtnTxt {
-        vertical-align: middle;
-    }
-
-    #helpButton {
-        min-width:    2em;
-    }
-
-
-
-
-
-
-
-    /*SWAP DIAG STYLES*/
-    .btnCheck {
-        background-color: #AFCDE7;
-    }
-    .btnCheck:hover {
-        background-color: #91c7f5;
-    }
-
-    .swHead {
-        line-height: 150%;
-        margin-bottom: 0em;
-        margin-top: 0.5em;
-        height: 3em;
-    }
-
-    .manualSwHead {
-        width: 80%;
-    }
-
-    .swOption {
-        /* font-size: 40px; */
-        display: block;
-        width: 80%;
-        height: 2.5em;
-        text-align: -webkit-center;
-        margin: 0.5em;}
-
-    .Jbtn {
-        /* font-size: 40px; */
-        display: inline-block;
-        width: 27%;
-        height: 2em;
-        border-radius: 10px;
-        text-align: center;
-        margin: 3%
-    }
-
-    .Vmod {
-        width: 90%;
-    }
-
-
-
-    #swapDialog,
-    #goToDiv,
-    #navBtnDialog {
-        display:    none;
-        position:   fixed;
-        /* font-size: 40px; */
-        width:  72vw;
-        top:    15vh;
-        left:   15vw;
-        z-index: 5;
-
-        background: rgba(205, 214, 219, 0.7);
-
-        /* padding: 0.5em; */
-
-        text-align: -webkit-center;
-
-        border-style:   solid;
-        border-color: black;
-        border-radius:  10px;
-    }
-
-    .modalBack {
-        display:  none;
-        position: fixed;
-        top:      0;
-        left:     0;
-        z-index:  5;
-
-        width:  100%;
-        height: 100%;
-
-        background: rgba(4, 29, 253, 0.233);
-
-        text-align: -webkit-center;
-    }
-
-
-    .dialogDiv {
-        display:  none;
-        position: fixed;
-        /* font-size: 40px; */
-        width:   75vw;
-        top:     15vh;
-        left:    15vw;
-        z-index: 5;
-
-        background: rgba(205, 214, 219, 0.7);
-
-        padding: 0.25em;
-
-        text-align: -webkit-center;
-
-        border-style: solid;
-        border-color: black;
-        border-radius: 10px;
-    }
-
-
-    .vacDiag-dateButton {
-        position:   relative;
-        min-width:  7em;
-        /* background-color: deepskyblue; */
-    }
-
-    .vacDiag-actionButton {
-        position:   relative;
-        display:    block;
-        width:      16em;
-        height:     2.5em;
-        margin:     0.5em
-    }
-    .vacDiag-dateInputContainer {
-        position:   relative;
-        display:    inline-block;
-        text-align: center;
-        width:      40%;
-        min-width:  7em;
-        /* background-color: deepskyblue; */
-    }
-
-    .dp-dateInput {
-        width:   90%;
-        padding: 5px;
-        border:  2px solid #DDD;
-        border-radius: 4px;
-        text-align:    center;
-     }
-     .dp-modal {
-        z-index: 5;
-     }
-
-
-
-
-
-
-
-
-    .swSubsetV {
-        display: inline-block;
-        width:   45%;
-        /* text-align: center; */
-        /* margin: auto; */
-    }
-
-    .swSubsetH {
-        display: block;
-        /* text-align: center; */
-        /* margin: auto */
-    }
-
-    .swSubsetH .swOption {
-        /* font-size: 40px; */
-        display: inline-block;
-        width: 25%;
-    }
-
-
-
-
-
-    .helpTexpP {
-        text-align: left;
-        margin: 0;
-    }
-
-
-
-
-
-
-    #curtain {
-        position: absolute;
-        top: 0;
-        left: 0;
-
-        min-width: 10vw;
-        min-height: 70vh;
-
-        background-color: rgba(0, 0, 253, 0.39);
-    }
-
-    .curtain {
-        position: absolute;
-        top: 0;
-        min-height: 50em;
-        min-width: calc( var(--maxDate-ColsLeft) * var(--td-minWidth) );
-        background-color: #1f48ce82;
-      }
-
-
-
-
-    #LogDiag {
-        padding: 0.25em;
-        background-color: #ffffff;
-        width: 90%;
-        left:  4%;
-    }
-
-    .logPeriodSelectContainer {
-        font-size:   1.2em;
-        font-weight: bold;
-    }
-
-    .logPeriodSelect {
-        background-color: #ffffff;
-        width: 5em;
-        border-radius: 0.25em;
-    }
-
-    .logTableContainer {
-        max-height: 45vh;
-        overflow-x: scroll;
-        overflow-y: scroll;
-    }
-
-
-    .summTable {
-        margin:         0.3em 0em;
-        border-style:   none;
-        border-spacing: 1px;
-        }
-        .summTable th,
-        .summTable td {
-            border-style: inherit;
-        }
-        .summTable .st-cnt {
-            text-align: right;
-        }
-
-    .logTable .th {
-        position: sticky;
-        position: -webkit-sticky;
-        z-index: 1;
-        }
-
-        .logTable td {
-            text-align:left;
-            padding-left: 1em;
-            }
-
-        .logTable .th-rows {
-            left: 0;
-            background-color: #ffffff;
-
-            font-weight:100;
-
-            }
-
-        .logTable .th-cols,
-        .logTable .th0 {
-            top:      0;
-            height: 1.5em;
-            background-color: rgb(226, 240, 255);
-        }
-        .logTable .th0 {
-            left: 0;
-            z-index: 10;
-            }
-        .logTable .th-cols {
-            text-align: left;
-            padding-left: 7em;
-        }
+.logTable .th-cols {
+    text-align: left;
+    padding-left: 7em;
+}
