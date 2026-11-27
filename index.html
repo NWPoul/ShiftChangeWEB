@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru-ru" dir="ltr" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <base href="/ShiftChangeWEB/" />
+    <meta name="robots" content="noindex" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <!-- Absolute /public/* so Bun HMR does not rewrite to broken /_bun/asset/... -->
+    <link rel="icon" type="image/png" sizes="192x192" href="./icons/fs-icon-192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="./icons/fs-icon-512.png" />
+    <link rel="apple-touch-icon" href="./icons/fs-icon-192.png" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Смена" />
+    <title>WebApp_ShiftChange</title>
+    <!-- Inline: covers Android splash → blank handoff before CSS/JS chunks. -->
+    <style>
+      #boot-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        margin: 0;
+        padding: 1.5rem;
+        background: #ffffff;
+        color: #1e3a5f;
+        font-family: system-ui, -apple-system, sans-serif;
+        text-align: center;
+        box-sizing: border-box;
+      }
+      #boot-splash img {
+        width: 8rem;
+        height: 8rem;
+        object-fit: contain;
+      }
+      #boot-splash-version {
+        margin: 0;
+        font-size: 0.8rem;
+        line-height: 1.3;
+        font-weight: 400;
+        color: #64748b;
+      }
+      #boot-splash-msg {
+        margin: 0;
+        max-width: 16rem;
+        font-size: 1.05rem;
+        line-height: 1.35;
+        font-weight: 500;
+      }
+    </style>
+  <script type="module" crossorigin src="./chunk-9k3gbrfv.js"></script></head>
+  <body>
+    <div id="boot-splash" role="status" aria-live="polite">
+      <img src="./icons/fs-icon-512.png" alt="" width="128" height="128" />
+      <p id="boot-splash-version" hidden></p>
+      <p id="boot-splash-msg" hidden>Перезапустите приложение, чтобы завершить установку</p>
+    </div>
+    <div id="root"></div>
+    
+  </body>
+</html>
